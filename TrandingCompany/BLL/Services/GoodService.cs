@@ -8,18 +8,13 @@ using System.Text;
 
 namespace BLL.Services
 {
-    public class GoodService: IBaseRepository
+    public class GoodService: IGoodRepository
     {
         private TrandingCompanyContext db;
 
         public GoodService()
         {
             this.db = new TrandingCompanyContext();
-        }
-
-        public IEnumerable<Good> GetAll()
-        {
-            return db.Goods;
         }
        
         public int GetGood()
@@ -54,13 +49,8 @@ namespace BLL.Services
             return Id;
         }
       
-        public void Create()
+        public void Create(string name, float price)
         {
-            Console.WriteLine("Enter name of good: ");
-            string name = Console.ReadLine();
-            Console.WriteLine($"Enter price of good {name} ");
-            float price = float.Parse(Console.ReadLine());
-
             Good good = new Good()
             {
                 GoodName = name,
@@ -71,30 +61,13 @@ namespace BLL.Services
 
         }
        
-        public void Change(int id)
+        public void Change(int id, string name, float price)
         {
             Good good = db.Goods.Single(x => x.Id == id);
 
-            Console.WriteLine("What do you want to change\n" +
-                "1 - name of good\n" +
-                "2 - price\n");
-            int answer = CheckNumber();
-
-            switch (answer)
-            {
-                case 1:
-                    Console.WriteLine("Enter name of good: ");
-                    string name = Console.ReadLine();
-                    good.GoodName = name;
-                    break;
-                case 2:
-                    Console.WriteLine($"Enter price : ");
-                    float price = float.Parse(Console.ReadLine());
-                    good.Price = price;
-                    break;
-                default:
-                    break;
-            }
+            good.GoodName = name;
+            good.Price = price;
+            
         }
        
         public void Delete(int id)

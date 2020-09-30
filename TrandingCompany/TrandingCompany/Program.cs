@@ -28,31 +28,26 @@ namespace TrandingCompany
                 }
                 else if (number == 2)
                 {
-                    for (int i = 0; i < 3; i++)
+                    string login = userService.GetUser();
+
+                    int id = userService.GetId(login);
+
+                    Console.WriteLine("Enter password: ");
+                    string password = Console.ReadLine();
+
+                    bool pass = userService.CheckPassword(id, password);
+                    if(pass)
                     {
-                        Console.WriteLine("Enter your login: ");
-                        string login = Console.ReadLine();
+                        CategoryMenu(id);
 
-
-                        int id = userService.GetId(login);
-
-                        if (id == 0)
-                        {
-                            Console.WriteLine($"You have entered wrong login, please enter again");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Enter password: ");
-                            string password = Console.ReadLine();
-
-                            bool pass = userService.CheckPassword(id, password);
-                            if(pass)
-                            {
-                                CategoryMenu(id);
-
-                            }
-                        }
                     }
+                    else
+                    {
+                        Console.WriteLine("Sorry but you have only 5 attemps for password");
+                        break;
+                    }
+                    
+                    
                 }
 
                 else if (number == 3)
@@ -82,7 +77,7 @@ namespace TrandingCompany
                 Console.WriteLine();
                 Console.WriteLine("Which category do you want to choose? Please select a number\n" +
                     "or press '0' if you want log out");
-                int categotyId = CheckNumber();
+                int categotyId = categoryService.GetCategory();
                 if (categotyId == 0)
                 {
                     break;
@@ -107,7 +102,7 @@ namespace TrandingCompany
                 Console.WriteLine("Please enter good's number and you will see responses anout it or press '0'" +
                     " if you want to return category");
 
-                int goodId = CheckNumber();
+                int goodId = goodService.GetGood();
                
                 if (goodId == 0)
                 {
@@ -131,7 +126,7 @@ namespace TrandingCompany
                 {
                     Console.WriteLine("What do you want to do next?");
                     Console.WriteLine("1 - search\n 2 - sort\n 3 - return to goods");
-                    int responseNumber = CheckNumber();
+                    int responseNumber = responseService.GetResponce();
 
                     if (responseNumber == 1)
                     {
@@ -160,7 +155,7 @@ namespace TrandingCompany
                 {
                     Console.WriteLine("What do you want to do next?");
                     Console.WriteLine("1 - add\n 2 - change\n 3 - delete\n 4 - return to good");
-                    int responseNumber = CheckNumber();
+                    int responseNumber = responseService.GetResponce();
                     Console.Clear();
 
                     if (responseNumber == 1)

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BLL.Services
 {
-    public class UserService: IBaseRepository
+    public class UserService: IUserRepository
     {
         private readonly TrandingCompanyContext db;
 
@@ -16,26 +16,21 @@ namespace BLL.Services
         {
             this.db = new TrandingCompanyContext();
         }
-
-        public IEnumerable<User> GetAll()
-        {
-            return db.Users;
-        }
      
-        public int GetUser()
+        public string GetUser()
         {
-            int Id = 0;
 
+            string login;
             var users = db.Users;
 
             bool t = true;
             while (true)
             {
-                Console.WriteLine("Enter id");
-                Id = CheckNumber();
+                Console.WriteLine("Enter your login: ");
+                login = Console.ReadLine();
                 foreach (var r in users)
                 {
-                    if (Convert.ToInt32(r.Id) == Id)
+                    if (r.Login == login)
                     {
                         t = false;
                         break;
@@ -51,71 +46,12 @@ namespace BLL.Services
                 }
             }
 
-            return Id;
+            return login;
         }
        
-        public void Create()
+        public void Create(string firstName, string secondName, bool gender, DateTime birthday, string address, string login, string password)
         {
-            Console.WriteLine("Enter first name: ");
-            string firstName = Console.ReadLine();
-
-            Console.WriteLine("Enter second name: ");
-            string secondName = Console.ReadLine();
-
-            Console.WriteLine("Enter 1 if you are male and 0 - female");
-            int genderNumber = Convert.ToInt32(Console.ReadLine());
-            bool gender = true;
-            while (true)
-            {
-                if (genderNumber == 1)
-                {
-                    gender = true;
-                    break;
-                    
-                }
-                if (genderNumber == 0)
-                {
-                    gender = false;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("You entered wrong number, please enret again: ");
-                }
-            }
-
-            Console.WriteLine("Enter day of your birthday(1 - 31)");
-            int day = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter month of your birthday(1 - 12)");
-            int month = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Enter year of your birthday");
-            int year = Convert.ToInt32(Console.ReadLine());
-           
-            DateTime birthday = new DateTime(year, month, day);
-
-
-            Console.WriteLine("Enter your address: ");
-            string address = Console.ReadLine();
-
             DateTime dateJoined = DateTime.Now;
-         
-            Console.WriteLine("Enter login: ");
-            string login = Console.ReadLine();
-
-            Console.WriteLine("Enter password: ");
-            string password1 = Console.ReadLine();
-            while (true)
-            {
-                Console.WriteLine("Enter password again");
-                string password2 = Console.ReadLine();
-                if (password1 == password2)
-                {
-                    break;
-                }
-            }
-
-
-
 
             User user = new User()
             {
@@ -126,7 +62,7 @@ namespace BLL.Services
                 Address = address,
                 DateJointed = dateJoined,
                 Login = login,
-                Password = password1,
+                Password = password,
             };
             db.Users.Add(user);
             db.SaveChanges();
@@ -326,7 +262,7 @@ namespace BLL.Services
 
         public bool CheckPassword(int id, string password)
         {
-            bool checkPass = true;
+            bool checkPass = false;
             
             var query = from u in db.Users
                         where u.Id == id
@@ -334,22 +270,24 @@ namespace BLL.Services
 
             List<User> users = query.ToList();
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 4; i++)
             {
                 foreach (var user in users)
                 {
                     if (user.Password == password)
                     {
                         checkPass = true;
+                        break;
                     }
                     else
                     {
                         Console.WriteLine("You entered wrong password, please enter again");
+                        password = Console.ReadLine();
                     }
                 }
-                if( i == 1)
+                if(checkPass == true)
                 {
-                    checkPass = false;
+                    i = 3;
                 }
             }
             return checkPass;

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BLL.Services
 {
-    public class CategoryService : IBaseRepository
+    public class CategoryService : ICategoryRepository
     {
         private TrandingCompanyContext db;
 
@@ -17,11 +17,6 @@ namespace BLL.Services
             this.db = new TrandingCompanyContext();
         }
 
-        public IEnumerable<Category> GetAll()
-        {
-            return db.Categories;
-        }
-        //перевірка чи існує
         public int GetCategory()
         {
             int Id = 0;
@@ -54,11 +49,8 @@ namespace BLL.Services
             return Id;
         }
         //додаємо
-        public void Create()
+        public void Create(string name)
         {
-            Console.WriteLine("Enter name of category: ");
-            string name = Console.ReadLine();
-
             Category city = new Category()
             {
                 CategoryName = name,
@@ -67,13 +59,10 @@ namespace BLL.Services
 
         }
         //зміни
-        public void Change(int id)
+        public void Change(int id, string name)
         {
             Category category = db.Categories.Single(x => x.Id == id);
 
-
-            Console.WriteLine("Enter name of category: ");
-            string name = Console.ReadLine();
             category.CategoryName = name;
         }
         //видалення

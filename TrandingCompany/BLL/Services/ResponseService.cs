@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BLL.Services
 {
-    public class ResponseService: IBaseRepository
+    public class ResponseService: IResponseRepository
     {
         private TrandingCompanyContext db;
 
@@ -17,30 +17,54 @@ namespace BLL.Services
             this.db = new TrandingCompanyContext();
         }
 
-        public IEnumerable<Response> GetAll()
+        public int GetResponce()
         {
-            return db.Responses;
-        }
-       
- 
-        public void Create()
-        {
-            Console.WriteLine("Enter response: ");
-            string responseName = Console.ReadLine();
-            DateTime dateTime = DateTime.Now;
+            int Id = 0;
 
-            Response response = new Response()
+            var responses = db.Responses;
+
+            bool t = true;
+            while (true)
             {
-                ResponseName = responseName,
-                CreateAt = dateTime
-            };
-            db.Responses.Add(response);
+                Console.WriteLine("Enter id");
+                Id = CheckNumber();
+                foreach (var r in responses)
+                {
+                    if (Convert.ToInt32(r.Id) == Id)
+                    {
+                        t = false;
+                        break;
+                    }
+                }
+                if (!t)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Enter again");
+                }
+            }
+
+            return Id;
         }
 
-        public void Create(int userId, int goodId)
+        //public void Create()
+        //{
+        //    Console.WriteLine("Enter response: ");
+        //    string responseName = Console.ReadLine();
+        //    DateTime dateTime = DateTime.Now;
+
+        //    Response response = new Response()
+        //    {
+        //        ResponseName = responseName,
+        //        CreateAt = dateTime
+        //    };
+        //    db.Responses.Add(response);
+        //}
+
+        public void Create(int userId, int goodId, string responseName)
         {
-            Console.WriteLine("Enter response: ");
-            string responseName = Console.ReadLine();
             DateTime dateTime = DateTime.Now;
 
             Response response = new Response()
@@ -53,15 +77,10 @@ namespace BLL.Services
             db.Responses.Add(response);
         }
 
-        public void Change(int id)
+        public void Change(int id, string name)
         {
             Response response = db.Responses.Single(x => x.Id == id);
 
-            
-
-
-            Console.WriteLine("Enter new response : ");
-            string name = Console.ReadLine();
             response.ResponseName = name;
         }
 
@@ -102,7 +121,7 @@ namespace BLL.Services
 
             foreach(var q in query)
             {
-                Console.WriteLine("{0,-10}{1, 30}{2, 50}", q.id, q.login, q.login);
+                Console.WriteLine("{0,-10}{1, 30}{2, 50}", q.id, q.login, q.response);
             }
          
 
