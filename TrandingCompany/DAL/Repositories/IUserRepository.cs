@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,5 +12,6 @@ namespace DAL.Repositories
         void Delete(int id);
         void ShowAll();
         void Get(int id);
+        List<User> Get();
     }
 }

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrandingCompany", "TrandingCompany\TrandingCompany.csproj", "{6FF7B1F4-66A2-43DE-B05D-0BCD4FB512D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrandingCompany", "TrandingCompany\TrandingCompany.csproj", "{6FF7B1F4-66A2-43DE-B05D-0BCD4FB512D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{67169D68-9DCB-4654-92D2-D59AD94DC213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{67169D68-9DCB-4654-92D2-D59AD94DC213}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{061050F3-DFB1-4B67-9003-1CE5329AB74C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{061050F3-DFB1-4B67-9003-1CE5329AB74C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelUnitTests", "DelUnitTests\DelUnitTests.csproj", "{75649320-FE23-472E-964C-8124E174B3A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{061050F3-DFB1-4B67-9003-1CE5329AB74C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{061050F3-DFB1-4B67-9003-1CE5329AB74C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{061050F3-DFB1-4B67-9003-1CE5329AB74C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75649320-FE23-472E-964C-8124E174B3A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75649320-FE23-472E-964C-8124E174B3A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75649320-FE23-472E-964C-8124E174B3A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75649320-FE23-472E-964C-8124E174B3A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
