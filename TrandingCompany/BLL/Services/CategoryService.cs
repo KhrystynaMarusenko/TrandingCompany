@@ -16,7 +16,7 @@ namespace BLL.Services
         {
             this.db = new TrandingCompanyContext();
         }
-        //перевірка на існування
+
         public int GetCategory()
         {
             int Id = 0;
@@ -142,6 +142,31 @@ namespace BLL.Services
             GC.SuppressFinalize(this);
         }
 
+
+        public List<Category> Get()
+        {
+            return db.Categories.ToList();
+        }
     }
+    //private bool disposed = false;
+
+    //public virtual void Dispose(bool disposing)
+    //{
+    //    if (!this.disposed)
+    //    {
+    //        if (disposing)
+    //        {
+    //            db.Dispose();
+    //        }
+    //    }
+    //    this.disposed = true;
+    //}
+
+    //public void Dispose()
+    //{
+    //    Dispose(true);
+    //    GC.SuppressFinalize(this);
+    //}
+
 }
 

@@ -16,7 +16,7 @@ namespace BLL.Services
         {
             this.db = new TrandingCompanyContext();
         }
-        //перевідка на існування по логіну
+
         public string GetUser()
         {
 
@@ -225,6 +225,11 @@ namespace BLL.Services
                     user.Address);
             }
 
+        }
+
+        public List<User> Get()
+        {
+            return db.Users.ToList();
         }
 
         static int CheckNumber()
