@@ -16,7 +16,7 @@ namespace BLL.Services
         {
             this.db = new TrandingCompanyContext();
         }
-
+        //перевірка на існування
         public int GetResponce()
         {
             int Id = 0;
@@ -49,20 +49,7 @@ namespace BLL.Services
             return Id;
         }
 
-        //public void Create()
-        //{
-        //    Console.WriteLine("Enter response: ");
-        //    string responseName = Console.ReadLine();
-        //    DateTime dateTime = DateTime.Now;
-
-        //    Response response = new Response()
-        //    {
-        //        ResponseName = responseName,
-        //        CreateAt = dateTime
-        //    };
-        //    db.Responses.Add(response);
-        //}
-
+        //створення
         public void Create(int userId, int goodId, string responseName)
         {
             DateTime dateTime = DateTime.Now;
@@ -76,36 +63,27 @@ namespace BLL.Services
             };
             db.Responses.Add(response);
         }
-
+        //зміни
         public void Change(int id, string name)
         {
             Response response = db.Responses.Single(x => x.Id == id);
 
             response.ResponseName = name;
         }
-
+        //видалення
         public void Delete(int id)
         {
             Response response = db.Responses.Find(id);
             if (response != null)
                 db.Responses.Remove(response);
         }
-
+        //збереження змін в базі даних
         public void Save()
         {
             db.SaveChanges();
         }
-
-        public void Show()
-        {
-            var responses = db.Responses;
-            Console.WriteLine("{0,-10} {1,15}", "ID", "Name");
-            foreach (var response in responses)
-            {
-                Console.WriteLine("{0,-10} {1,15}",response.Id, response.ResponseName);
-            }
-        }
-
+        
+        //пошук по id
         public void Get(int id)
         {
             var query = from c in db.Responses
@@ -126,7 +104,7 @@ namespace BLL.Services
          
 
         }
-
+        //функція яка виводить всі данні з таблиці
         public void ShowAll()
         {
             var responses = db.Responses;
@@ -155,7 +133,7 @@ namespace BLL.Services
             }
             return n;
         }
-
+        //сортує відгуки по даті створення і логінах юзера
         public void SortResponse()
        {
             Console.WriteLine("You can sort responses by\n" +
@@ -178,6 +156,8 @@ namespace BLL.Services
                     {
                         Console.WriteLine("  {0,-10}{1,50}", q.date, q.response);
                     }
+                    Console.WriteLine("Please press enter to continue");
+                    Console.ReadKey();
                     break;
                 }
                 if(number == 2)
@@ -197,6 +177,8 @@ namespace BLL.Services
                     {
                         Console.WriteLine("{0,-10}{1,10}{2,30}{3,50}", q.firstName, q.secondName, q.login, q.response);
                     }
+                    Console.WriteLine("Please press enter to continue");
+                    Console.ReadKey();
                     break;
                 }
                 else
@@ -206,7 +188,7 @@ namespace BLL.Services
             }
             
        }
-
+        //пошук відгуків по даті створення і логінах юзера
         public void SearchResponse()
         {
             Console.WriteLine("You can search by 1 - date of creating and 2 - user's login");
@@ -235,6 +217,9 @@ namespace BLL.Services
                             if (r.CreateAt == dateCreating)
                             {
                                 t = false;
+                                Console.WriteLine("Good");
+                                Console.WriteLine("Please press enter to continue");
+                                Console.ReadKey();
                                 break;
                             }
                         }
@@ -277,6 +262,8 @@ namespace BLL.Services
                                 if(resp.UserId == idUser)
                                 {
                                     Console.WriteLine("everything is good");
+                                    Console.WriteLine("Please press enter to continue");
+                                    Console.ReadKey();
                                     break;
                                 }
                             }
@@ -292,7 +279,25 @@ namespace BLL.Services
                 
         }
 
-       
 
+        private bool disposed = false;
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

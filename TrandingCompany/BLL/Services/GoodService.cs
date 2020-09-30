@@ -16,7 +16,7 @@ namespace BLL.Services
         {
             this.db = new TrandingCompanyContext();
         }
-       
+       //перевірка на існування
         public int GetGood()
         {
             int Id = 0;
@@ -48,7 +48,7 @@ namespace BLL.Services
 
             return Id;
         }
-      
+      //створення
         public void Create(string name, float price)
         {
             Good good = new Good()
@@ -60,7 +60,7 @@ namespace BLL.Services
             db.Goods.Add(good);
 
         }
-       
+       //зміни
         public void Change(int id, string name, float price)
         {
             Good good = db.Goods.Single(x => x.Id == id);
@@ -69,14 +69,14 @@ namespace BLL.Services
             good.Price = price;
             
         }
-       
+       //видалення
         public void Delete(int id)
         {
             Good good = db.Goods.Find(id);
             if (good!= null)
                 db.Goods.Remove(good);
         }
-     
+     //збереження змін в базі даних
         public void Save()
         {
             db.SaveChanges();
@@ -91,7 +91,7 @@ namespace BLL.Services
                 Console.WriteLine("   {0,-10} {1,15}", good.Id, good.GoodName);
             }
         }
-    
+        //виводить дані тільки того товару, id якого ми передали
         public void Get(int id)
         {
             var query = from c in db.Goods
@@ -106,7 +106,7 @@ namespace BLL.Services
 
 
         }
-     
+        //показ
         public void ShowAll()
         {
             var goods = db.Goods;
@@ -135,7 +135,7 @@ namespace BLL.Services
             }
             return n;
         }
-
+        //повертає id товару по імені яке ми передали
         public int GetId(string name)
         {
             int id = 0;
@@ -150,6 +150,25 @@ namespace BLL.Services
             return id;
         }
 
-    
+        private bool disposed = false;
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
     }
 }

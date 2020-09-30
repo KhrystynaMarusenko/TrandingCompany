@@ -16,7 +16,7 @@ namespace BLL.Services
         {
             this.db = new TrandingCompanyContext();
         }
-     
+        //перевідка на існування по логіну
         public string GetUser()
         {
 
@@ -48,7 +48,7 @@ namespace BLL.Services
 
             return login;
         }
-       
+       //створення
         public void Create(string firstName, string secondName, bool gender, DateTime birthday, string address, string login, string password)
         {
             DateTime dateJoined = DateTime.Now;
@@ -68,7 +68,7 @@ namespace BLL.Services
             db.SaveChanges();
 
         }
-       
+        //зміни
         public void Change(int id)
         {
             User user = db.Users.Single(x => x.Id == id);
@@ -176,14 +176,14 @@ namespace BLL.Services
                     break;
             }
         }
-        
+        //видалення
         public void Delete(int id)
         {
             User user = db.Users.Find(id);
             if (user != null)
                 db.Users.Remove(user);
         }
-        
+        //збереження змін
         public void Save()
         {
             db.SaveChanges();
@@ -198,7 +198,7 @@ namespace BLL.Services
                 Console.WriteLine("   {0,-10} {1,15} {2,15}", user.Id, user.FirstName, user.SecondName);
             }
         }
-       
+        //виводить дані юзера по id яке ми передали
         public void Get(int id)
         {
             var query = from c in db.Users
@@ -211,7 +211,7 @@ namespace BLL.Services
                 Console.WriteLine($"Name: {user.FirstName} {user.SecondName}");
             }
         }
-
+        //показ
         public void ShowAll()
         {
             var users = db.Users;
@@ -244,7 +244,7 @@ namespace BLL.Services
             }
             return n;
         }
-
+        //витягує дані про юзера по логіну
         public int GetId(string login)
         {
             int id = 0;
@@ -259,7 +259,7 @@ namespace BLL.Services
             }
             return id;
         }
-
+        //перевірка паролю
         public bool CheckPassword(int id, string password)
         {
             bool checkPass = false;
@@ -292,7 +292,7 @@ namespace BLL.Services
             }
             return checkPass;
         }
-
+        //перевірка на адміна
         public void CheckAdmin()
         {
 
@@ -324,6 +324,26 @@ namespace BLL.Services
                     }
                 }
             }
+        }
+
+        private bool disposed = false;
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
     }

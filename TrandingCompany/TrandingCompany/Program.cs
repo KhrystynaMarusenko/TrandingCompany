@@ -1,18 +1,20 @@
 ﻿using System;
 using BLL.Services;
 using DAL.Entities;
+using DAL.Repositories;
 
 namespace TrandingCompany
 {
     class Program
     {
+        //головна функція
         static void Main(string[] args)
         {
             Menu();
 
             Console.ReadKey();
         }
-
+        //Функція де користувач логується
         static void Menu()
         {
             UserService userService = new UserService();
@@ -35,6 +37,8 @@ namespace TrandingCompany
                     Console.WriteLine("Enter password: ");
                     string password = Console.ReadLine();
 
+
+
                     bool pass = userService.CheckPassword(id, password);
                     if(pass)
                     {
@@ -52,7 +56,64 @@ namespace TrandingCompany
 
                 else if (number == 3)
                 {
-                    userService.Create();
+                    Console.WriteLine("Enter first name: ");
+                    string firstName = Console.ReadLine();
+
+                    Console.WriteLine("Enter second name: ");
+                    string secondName = Console.ReadLine();
+
+                    Console.WriteLine("Enter 1 if you are male and 0 - female");
+                    int genderNumber = Convert.ToInt32(Console.ReadLine());
+                    bool gender = true;
+                    while (true)
+                    {
+                        if (genderNumber == 1)
+                        {
+                            gender = true;
+                            break;
+
+                        }
+                        if (genderNumber == 0)
+                        {
+                            gender = false;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You entered wrong number, please enret again: ");
+                        }
+                    }
+
+                    Console.WriteLine("Enter day of your birthday(1 - 31)");
+                    int day = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter month of your birthday(1 - 12)");
+                    int month = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter year of your birthday");
+                    int year = Convert.ToInt32(Console.ReadLine());
+
+                    DateTime birthday = new DateTime(year, month, day);
+
+
+                    Console.WriteLine("Enter your address: ");
+                    string address = Console.ReadLine();
+
+                    DateTime dateJoined = DateTime.Now;
+
+                    Console.WriteLine("Enter login: ");
+                    string login = Console.ReadLine();
+
+                    Console.WriteLine("Enter password: ");
+                    string password1 = Console.ReadLine();
+                    while (true)
+                    {
+                        Console.WriteLine("Enter password again");
+                        string password2 = Console.ReadLine();
+                        if (password1 == password2)
+                        {
+                            break;
+                        }
+                    }
+                    userService.Create(firstName, secondName, gender, birthday, address, login, password1);
                     userService.Save();
                     Console.Clear();
                 }
@@ -66,7 +127,7 @@ namespace TrandingCompany
                 }
             }
         }
-
+        //Меню для таблиці Categoty
         static void CategoryMenu(int idUser)
         {
             CategoryService categoryService = new CategoryService();
@@ -90,7 +151,7 @@ namespace TrandingCompany
                 }
             }
         }
-
+        //Меню для таблиці Good
         static void GoodMenu(int Id, int idUser)
         {
             GoodService goodService = new GoodService();
@@ -114,7 +175,7 @@ namespace TrandingCompany
                 }
             }
         }
-
+        //Меню для таблиці Response
         static void ResponseMenu(int Id, int idUser, int goodId)
         {
             ResponseService responseService = new ResponseService();
@@ -127,6 +188,7 @@ namespace TrandingCompany
                     Console.WriteLine("What do you want to do next?");
                     Console.WriteLine("1 - search\n 2 - sort\n 3 - return to goods");
                     int responseNumber = responseService.GetResponce();
+                    Console.Clear();
 
                     if (responseNumber == 1)
                     {
@@ -160,7 +222,10 @@ namespace TrandingCompany
 
                     if (responseNumber == 1)
                     {
-                        responseService.Create(idUser, goodId);
+                        Console.WriteLine("Enter response: ");
+                        string responseName = Console.ReadLine();
+                        responseService.Create(idUser, goodId, responseName);
+                        responseService.Save();
                         break;
                     }
                     else if (responseNumber == 2)
@@ -168,7 +233,9 @@ namespace TrandingCompany
                         responseService.Get(idUser);
                         Console.WriteLine("Please enter id of response which you want to change");
                         int responseId = CheckNumber();
-                        responseService.Change(responseId);
+                        Console.WriteLine("Enter new response : ");
+                        string name = Console.ReadLine();
+                        responseService.Change(responseId, name);
                         Console.Clear();
                         break;
                     }

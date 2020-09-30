@@ -16,7 +16,7 @@ namespace BLL.Services
         {
             this.db = new TrandingCompanyContext();
         }
-
+        //перевірка на існування
         public int GetCategory()
         {
             int Id = 0;
@@ -77,16 +77,6 @@ namespace BLL.Services
         {
             db.SaveChanges();
         }
-        //показ
-        public void Show()
-        {
-            var categories = db.Categories;
-            Console.WriteLine("   {0,-10} {1,15}", "ID", "Name");
-            foreach (var category in categories)
-            {
-                Console.WriteLine("   {0,-10} {1,15}", category.Id, category.CategoryName);
-            }
-        }
         //пошук
         public void Get(int id)
         {
@@ -102,7 +92,7 @@ namespace BLL.Services
 
 
         }
-        //виводиться все, пв'язано з таблицею Region
+        //виводить всі данні
         public void ShowAll()
         {
             var categories = db.Categories;
@@ -132,25 +122,25 @@ namespace BLL.Services
             return n;
         }
 
-        //private bool disposed = false;
+        private bool disposed = false;
 
-        //public virtual void Dispose(bool disposing)
-        //{
-        //    if (!this.disposed)
-        //    {
-        //        if (disposing)
-        //        {
-        //            db.Dispose();
-        //        }
-        //    }
-        //    this.disposed = true;
-        //}
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
 
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
     }
 }
