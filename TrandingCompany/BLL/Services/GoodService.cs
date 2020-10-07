@@ -17,17 +17,14 @@ namespace BLL.Services
             this.db = new TrandingCompanyContext();
         }
        //перевірка на існування
-        public int GetGood()
+        public int GetGood(int Id)
         {
-            int Id = 0;
-
             var goods = db.Goods;
 
             bool t = true;
             while (true)
             {
                 Console.WriteLine("Enter id");
-                Id = CheckNumber();
                 foreach (var r in goods)
                 {
                     if (Convert.ToInt32(r.Id) == Id)
@@ -37,6 +34,10 @@ namespace BLL.Services
                     }
                 }
                 if (!t)
+                {
+                    break;
+                }
+                if (Id == 0)
                 {
                     break;
                 }

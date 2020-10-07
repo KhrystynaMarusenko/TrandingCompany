@@ -17,17 +17,17 @@ namespace BLL.Services
             this.db = new TrandingCompanyContext();
         }
 
-        public int GetCategory()
+        public int GetCategory(int Id)
         {
-            int Id = 0;
-
+           
             var categories = db.Categories;
+
+
 
             bool t = true;
             while (true)
             {
                 Console.WriteLine("Enter id");
-                Id = CheckNumber();
                 foreach (var r in categories)
                 {
                     if (Convert.ToInt32(r.Id) == Id)
@@ -37,6 +37,10 @@ namespace BLL.Services
                     }
                 }
                 if (!t)
+                {
+                    break;
+                }
+                if(Id == 0)
                 {
                     break;
                 }

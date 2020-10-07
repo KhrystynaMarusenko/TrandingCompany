@@ -138,8 +138,9 @@ namespace TrandingCompany
                 Console.WriteLine();
                 Console.WriteLine("Which category do you want to choose? Please select a number\n" +
                     "or press '0' if you want log out");
-                int categotyId = categoryService.GetCategory();
-                if (categotyId == 0)
+                int num = CheckNumber();
+                int categotyId = categoryService.GetCategory(num);
+                if (num == 0)
                 {
                     break;
                 }
@@ -162,8 +163,8 @@ namespace TrandingCompany
 
                 Console.WriteLine("Please enter good's number and you will see responses anout it or press '0'" +
                     " if you want to return category");
-
-                int goodId = goodService.GetGood();
+                int num = CheckNumber();
+                int goodId = goodService.GetGood(num);
                
                 if (goodId == 0)
                 {
@@ -187,6 +188,7 @@ namespace TrandingCompany
                 {
                     Console.WriteLine("What do you want to do next?");
                     Console.WriteLine("1 - search\n 2 - sort\n 3 - return to goods");
+
                     int responseNumber = responseService.GetResponce();
                     Console.Clear();
 

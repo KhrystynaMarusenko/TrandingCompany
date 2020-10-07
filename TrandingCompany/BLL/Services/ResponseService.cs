@@ -19,8 +19,8 @@ namespace BLL.Services
         //перевірка на існування
         public int GetResponce()
         {
-            int Id = 0;
 
+            int Id = 0;
             var responses = db.Responses;
 
             bool t = true;
@@ -37,6 +37,10 @@ namespace BLL.Services
                     }
                 }
                 if (!t)
+                {
+                    break;
+                }
+                if (Id == 0)
                 {
                     break;
                 }
