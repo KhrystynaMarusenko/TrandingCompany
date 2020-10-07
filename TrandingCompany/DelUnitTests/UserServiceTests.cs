@@ -7,7 +7,7 @@ using Xunit;
 
 namespace DelUnitTests
 {
-	public class CategoryServiceTests
+	public class UserServiceTests
 	{
         [Fact]
         public void CanAddUser()
