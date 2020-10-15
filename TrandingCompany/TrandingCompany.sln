@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{061050F3-DFB1-4B67-9003-1CE5329AB74C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelUnitTests", "DelUnitTests\DelUnitTests.csproj", "{75649320-FE23-472E-964C-8124E174B3A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DelUnitTests", "DelUnitTests\DelUnitTests.csproj", "{75649320-FE23-472E-964C-8124E174B3A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrandingCompanyWF", "TrandingCompanyWF\TrandingCompanyWF.csproj", "{BF934E92-150E-4B8C-AD45-46D866568D86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{75649320-FE23-472E-964C-8124E174B3A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75649320-FE23-472E-964C-8124E174B3A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75649320-FE23-472E-964C-8124E174B3A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF934E92-150E-4B8C-AD45-46D866568D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF934E92-150E-4B8C-AD45-46D866568D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF934E92-150E-4B8C-AD45-46D866568D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF934E92-150E-4B8C-AD45-46D866568D86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
