@@ -16,9 +16,74 @@ namespace Forms
 {
     public partial class RegistrationForm : Form
     {
-        public RegistrationForm()
+        private readonly AuthenticationService _authenticationService;
+        private readonly UserService _userService;
+        public RegistrationForm(AuthenticationService authenticationService, UserService userService)
         {
+            _userService = userService;
+            _authenticationService = authenticationService;
+
             InitializeComponent();
         }
+
+        private void button_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button_create_Click(object sender, EventArgs e)
+        {
+            User user = new User();
+            if (textbox_pwd.Text == textbox_pwd2.Text)
+            {
+                user.HashPassword = HashPassword.Hash(textbox_pwd2.Text);
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Passwords are not match!",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+            user.Name = textbox_name.Text;
+            user.Login = textbox_login.Text;
+            user.Age = Convert.ToInt32(textbox_age.Text);
+            try
+            {
+                _userService.CreateUser(user);
+                MessageBox.Show(
+                    "New user was created!",
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show(
+                    "You have troubles!",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        //---
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
