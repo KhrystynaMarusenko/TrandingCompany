@@ -58,7 +58,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppSettings\AppData.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,11 +88,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TradingCompanyDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="TradingCompanyDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TradingCompanyDataSet1.xsd</DependentUpon>
     </Compile>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -138,17 +132,6 @@
     <None Include="TradingCompanyDataSet.xss">
       <DependentUpon>TradingCompanyDataSet.xsd</DependentUpon>
     </None>
-    <None Include="TradingCompanyDataSet1.xsc">
-      <DependentUpon>TradingCompanyDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="TradingCompanyDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TradingCompanyDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="TradingCompanyDataSet1.xss">
-      <DependentUpon>TradingCompanyDataSet1.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -171,8 +154,6 @@
       <Name>Entity</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LogInForms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

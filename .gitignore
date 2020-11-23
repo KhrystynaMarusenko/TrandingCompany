@@ -348,3 +348,11 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+
+TradingCompany/Forms/TradingCompanyDataSet1.xsd
+TradingCompany/WPFs/ItemListViewModel.cs
+TradingCompany/WPFs/ItemsListViewModel.cs
+TradingCompany/WPFs/ItemsMenu.xaml
+TradingCompany/WPFs/ItemsMenu.xaml.cs
+TrandingCompany/TrandingCompany.sln
