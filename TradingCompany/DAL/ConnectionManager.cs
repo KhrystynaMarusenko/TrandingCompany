@@ -10,7 +10,7 @@ namespace DAL
 {
     public class ConnectionManager //sealed
     {
-        private const string CONNECTION_STRING = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TradingCompany;Integrated Security=True";
+        private const string CONNECTION_STRING = @"Data Source=DESKTOP-RNETUJT\SQLEXPRESS;Initial Catalog=TradingCompany;Integrated Security=True";
 
         //
         private static volatile ConnectionManager instance = null;
